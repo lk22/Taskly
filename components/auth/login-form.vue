@@ -19,7 +19,7 @@ export default {
     },
 
     /**
-     * methods bound to component
+     * methods bound to componentv
      * @type {Object}
      */
     methods: {
