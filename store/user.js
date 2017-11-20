@@ -68,8 +68,8 @@
 					 * @return {[type]}                  [description]
 					 */
 					async login(context, {
-						username,
-						password
+						username, // username param
+						password // password param
 					}) {
 						try {
 
@@ -111,11 +111,11 @@
 					 * registering new user
 					 */
 					async register(context, {
-						firstname,
-						lastname,
-						email,
-						password,
-						c_password
+						firstname, // firstname param
+						lastname, // lastname param
+						email, // email param
+						password, // password param
+						c_password // password confirmation param
 					}) {
 
 						try {

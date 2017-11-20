@@ -1,42 +1,49 @@
 <script>
-
+import user from '~/store/user.js'
 export default {
     name: 'TasklyHeader',
     data() {
         return {
             searchString: '',
-            searchError: ''
+            searchError: '',
         }
     },
 
     methods: {
-        createSearchFromString() {
+        createSearchFromString( event ) {
             if ( !this.searchString ) {
                 this.searchError = 'your search string is empty try again.'
-            } else {
-                /**
-                 * @todo add search store
-                 * @todo add search action
-                 * @type {Object}
-                 */
+            } else if ( this.searchString.valueOf('task: ' + event.value)) {
+                // fire action to search for tasks
+            } else if ( this.searchString.valueOf('tasklist: ' + event.value) ){
+                // fire action to search for tasklists
+            } else if ( this.searchString.value('place: ' + event.value) ) {
+                // fire action to search for tasks that has place attached
             }
         }
     },
 
-    computed: {
-        searchString: {
-            set( string ) {
-                const search = this.searchString
-                /**
-                 * @todo create a store
-                 * @todo add action to set a search string to store
-                 */
-            },
+    mounted() {
+        console.log(this.$store.state)
+    },
 
-            get() {
-                return this.searchString
-            }
-        }
+    computed: {
+    //     searchString: {
+    //         set( string ) {
+    //             const search = this.searchString
+    //             /**
+    //              * @todo create a store
+    //              * @todo add action to set a search string to store
+    //              */
+    //         },
+    //
+    //         get() {
+    //             return this.searchString
+    //         }
+    //     }
+        // username: () => {
+        //     return user
+        // }
     }
 }
 
@@ -70,7 +77,7 @@ export default {
                             <div class="input-group searchBar-form__string">
                                 <input
                                     v-model="searchString"
-                                    v-keyup.enter="createSearchFromString"
+                                    @click="createSearchFromString"
                                     type="text"
                                     class="input searchString"
                                     name="searchString"
@@ -81,6 +88,20 @@ export default {
                     </div> <!-- center inner search bar end -->
                 </div> <!-- center inner end -->
             </div> <!-- center column end -->
+
+            <!-- right header colomn -->
+            <div class="dashboard-header__right">
+                <!-- right inner wrapper -->
+                <div class="right-inner">
+                    <!-- right inner user container -->
+                    <div class="right-inner__user">
+                        <!-- user -->
+                        <div class="user">
+                            <h4 class="username">Leo Knudsen</h4>
+                        </div> <!-- user end -->
+                    </div> <!-- right inner container end -->
+                </div> <!-- right inner wrapper end -->
+            </div> <!-- right header column end -->
         </div> <!-- columns end -->
     </div> <!-- header wrapper end -->
 
@@ -160,6 +181,27 @@ export default {
                                 color: #fff;
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        // right header column
+        .dashboard-header__right{
+
+            // right inner
+            .right-inner{
+                padding: 1.5rem;
+
+                // right inner user
+                .right-inner__user{
+                    margin-top: 1rem;
+
+                    // user
+                    .user {
+                        float:right;
+
+                        .username { text-align: right; color: #fff;}
                     }
                 }
             }

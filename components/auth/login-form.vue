@@ -1,7 +1,7 @@
 <script>
 
 export default {
-    name: 'todo',
+    name: 'loginForm',
     data() {
         return {
             error: '',
