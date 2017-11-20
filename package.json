@@ -1,0 +1,35 @@
+{
+  "name": "taskly-vue",
+  "version": "1.0.0",
+  "description": "Nuxt.js project",
+  "author": "Leo Knudsen <nightskater-220@hotmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "axios": "^0.17.0",
+    "bulma": "^0.6.1",
+    "cors": "^2.8.4",
+    "node-sass": "^4.6.0",
+    "nuxt": "^1.0.0-rc11",
+    "sass-loader": "^6.0.6",
+    "vuex-persistedstate": "^2.3.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^3.1.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
