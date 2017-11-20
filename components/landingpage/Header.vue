@@ -21,7 +21,6 @@
 </template>
 
 <style lang="scss">
-
 	.taskly-header {
 		height: 70px;
 		width: 100%;
