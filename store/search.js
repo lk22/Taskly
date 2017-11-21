@@ -50,7 +50,7 @@
                 createSearchFromString(context, { string } ) {
 
                     // making request to API
-                    makeRequest('GET', api + 'search?string=' + string).then((results) => {
+                    makeRequest('GET', api + 'search?string=' + string).then( (results) => {
 
                         // storing the results
                         const searchData = results.data
@@ -63,24 +63,27 @@
 
                         // extending promise
                         return Promise.resolve()
-                    }).catch((error) => {
+
+                    }).catch( (error) => {
                         throw new Error(error)
                     })
-                },
+                }
 
-                /**
-                 * action mutators
-                 * @type {Object}
-                 */
-                mutations: {
-                    [types.SET_SEARCH_STRING](state, results) {
-                        state.searchResults = results
-                    }
-                },
 
-                // allow store namespaces
-                namespaced: true
-            }
+            },
+
+            /**
+             * action mutators
+             * @type {Object}
+             */
+            mutations: {
+                [types.SET_SEARCH_STRING](state, results) {
+                    state.searchResults = results
+                }
+            },
+
+            // allow store namespaces
+            namespaced: true
 
         }
 

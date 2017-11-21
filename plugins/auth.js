@@ -4,7 +4,7 @@ export default (options) => {
 
 		// console.log('Auth token: ' + authToken)
 
-		if(!authToken && to.fullPath.indexOf('/app') >= 0) {
+		if(!authToken && to.fullPath.indexOf('/app') > 0) {
 			options.redirect('/login')
 		}
 	}

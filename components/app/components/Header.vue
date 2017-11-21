@@ -23,10 +23,6 @@ export default {
         }
     },
 
-    mounted() {
-        console.log(this.$store.state)
-    },
-
     computed: {
     //     searchString: {
     //         set( string ) {
@@ -41,9 +37,9 @@ export default {
     //             return this.searchString
     //         }
     //     }
-        // username: () => {
-        //     return user
-        // }
+        username() {
+            return this.$store.getters['user/getFullName'];
+        }
     }
 }
 
@@ -97,7 +93,7 @@ export default {
                     <div class="right-inner__user">
                         <!-- user -->
                         <div class="user">
-                            <h4 class="username">Leo Knudsen</h4>
+                            <h4 class="username">{{ username }}</h4>
                         </div> <!-- user end -->
                     </div> <!-- right inner container end -->
                 </div> <!-- right inner wrapper end -->

@@ -1,5 +1,4 @@
 <script>
-
     import TasklyHeader from '~/components/app/components/Header'
     export default {
         components: {

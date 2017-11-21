@@ -53,7 +53,11 @@
 				getters: {
 					getUser: state => {
 						return state.authUser
-					}
+					},
+
+                    getFullName: state => {
+                        return state.data.name
+                    }
 				},
 
 				/**
