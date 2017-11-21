@@ -24,19 +24,6 @@ export default {
     },
 
     computed: {
-    //     searchString: {
-    //         set( string ) {
-    //             const search = this.searchString
-    //             /**
-    //              * @todo create a store
-    //              * @todo add action to set a search string to store
-    //              */
-    //         },
-    //
-    //         get() {
-    //             return this.searchString
-    //         }
-    //     }
         username() {
             return this.$store.getters['user/getFullName'];
         }

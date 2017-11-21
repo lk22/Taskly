@@ -48,7 +48,6 @@
                  * @return {[type]}         [description]
                  */
                 createSearchFromString(context, { string } ) {
-
                     // making request to API
                     makeRequest('GET', api + 'search?string=' + string).then( (results) => {
 
@@ -68,8 +67,6 @@
                         throw new Error(error)
                     })
                 }
-
-
             },
 
             /**
