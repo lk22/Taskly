@@ -144,5 +144,10 @@
                  * 2: checkoutTask action
                  * 3: checkAllTasks action
                  */
-            }
+            },
+
+            mutations: {
+
+            },
+            namespaced: true;
         }
