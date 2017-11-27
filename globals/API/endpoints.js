@@ -23,8 +23,11 @@ export const endpoints = {
  	tasklists: {
  		all: 				api + 'tasklists',
  		tasklistsTasks:	 	api + 'tasklists/tasks',
- 		singleTasklist: 	api + 'tasklists/:list_slug'
- 	},
+ 		singleTasklist: 	api + 'tasklists/:list_slug',
+		createTasklist:     api + 'tasklists/create-tasklist',
+		updateTasklist:  	api + 'tasklists/:list_slug/update_tasklist',
+		deleteTasklist:     api + 'tasklists/:id/delete-tasklist'
+	},
 
  	tasks: {
  		all: 				api + 'tasks',
