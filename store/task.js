@@ -27,3 +27,18 @@
             CHECKOUT_TASK: 'CHECKOUT_TASK',
             CHECKOUT_ALL_TASKS: 'CHECKOUT_ALL_TASKS'
         }
+
+
+/**
+ * task store
+ */
+
+
+        const task = {
+            /**
+             * State object
+             */
+            state: {
+                items: []
+            }
+        }
