@@ -168,6 +168,7 @@
                  */
                 [types.REMOVE_TASK_LIST](state, tasklist) {
                     state.items = state.items.filter(item => item.id !== todo.id)
-                }
+                },
+                namespaced: true
             }
         }
