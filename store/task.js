@@ -151,3 +151,6 @@
             },
             namespaced: true;
         }
+
+
+export default task
