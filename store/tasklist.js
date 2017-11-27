@@ -60,7 +60,25 @@
                 create(context, {
                     name
                 }) {
-                    // make post request to api here
+                    try {
+
+                        makeRequest('POST', api.tasklists.createTasklist, {name}).then((response) => {
+                            console.log(response);
+
+                            const name = name;
+                            context.commit(types.ADD_TASK_LIST, {
+                                name
+                            });
+
+                            // extending request
+                            return Promise.resolve();
+
+                        })
+
+                    } catch(error) {
+                        // throw error
+                    }
+
                 }
             }
         }
