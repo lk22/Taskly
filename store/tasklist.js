@@ -37,7 +37,10 @@
              * @type {Object}
              */
             state: {
-                tasklists: {}
+                items: []
+                tasklist: {
+
+                }
             },
 
             /**
@@ -81,6 +84,12 @@
 
                 },
 
+                /**
+                 * Update existing tasklist
+                 * @param  {[type]} context [description]
+                 * @param  {[type]} name    [description]
+                 * @return {[type]}         [description]
+                 */
                 update(context, {
                     name
                 }) {
@@ -104,6 +113,12 @@
                     }
                 },
 
+                /**
+                 * Delete existing tasklist
+                 * @param  {[type]} context [description]
+                 * @param  {[type]} id      [description]
+                 * @return {[type]}         [description]
+                 */
                 delete(context, {
                     id
                 }) {
@@ -122,6 +137,37 @@
                         throw new Error('Could not delete your tasklist')
                     }
 
+                }
+            },
+
+            /**
+             * Mutations
+             */
+            mutations: {
+
+                /**
+                 * add task list mutation
+                 */
+                [types.ADD_TASK_LIST](state, tasklist) {
+                    state.items = [tasklist].concat(state.items)
+                },
+
+                /**
+                 * update task list mutation
+                 */
+                [types.UPDATE_TASK_LIST](state, tasklist) {
+                    const {name} = tasklist
+
+                    if(name) {
+                        tasklist.name = name
+                    }
+                },
+
+                /**
+                 * removing tasklist mutation
+                 */
+                [types.REMOVE_TASK_LIST](state, tasklist) {
+                    state.items = state.items.filter(item => item.id !== todo.id)
                 }
             }
         }
