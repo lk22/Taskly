@@ -172,3 +172,6 @@
                 namespaced: true
             }
         }
+
+
+export default tasklist

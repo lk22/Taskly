@@ -1,7 +1,8 @@
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import user from './user'
-import search from './search'
+import search from './search',
+import tasklist from './tasklist'
 
 const plugins = []
 
@@ -12,12 +13,13 @@ const plugins = []
 const createStore = () => new Vuex.Store({
 	modules: {
 		user,
-		search
+		search,
+		tasklist
 	},
 	plugins: [
 		createPersistedState({
 			key: 'taskly',
-			paths: ['user', 'search']
+			paths: ['user', 'search', 'tasklist']
 		})
 	],
 });
