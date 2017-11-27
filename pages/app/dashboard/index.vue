@@ -1,7 +1,14 @@
 <script>
 
     export default {
-        layout: 'app'
+        layout: 'app',
     }
 
 </script>
+
+<template>
+
+</template>
+
+<style lang="scss">
+</style>
