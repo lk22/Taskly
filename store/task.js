@@ -40,5 +40,18 @@
              */
             state: {
                 items: []
-            }
+            },
+
+            /**
+             * getter methods
+             */
+            getters: {
+                getTasks: state => {
+                    return state.items
+                },
+
+                getTask: state => (id) => {
+                    return state.items.filter(task => task.id === id)
+                }
+            },
         }
