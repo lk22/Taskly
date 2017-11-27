@@ -79,6 +79,49 @@
                         // throw error
                     }
 
+                },
+
+                update(context, {
+                    name
+                }) {
+
+                    try {
+
+                        makeRequest('POST', api + 'tasklists/' + state.tasklists.slug + 'update-tasklist').then( (response) => {
+                            console.log(response);
+
+                            const name = name
+                            context.commit(types.UPDATE_TASK_LIST, {
+                                name
+                            })
+
+                            // extending request
+                            return Promist.resolve();
+                        })
+
+                    } catch ( error ) {
+                        // throw error here
+                    }
+                },
+
+                delete(context, {
+                    id
+                }) {
+
+                    try {
+
+                        makeRequest('POST', api + 'tasklists/' + id + '/delete-tasklist').then( (response) => {
+                            console.log(response);
+
+                            context.commit(types.REMOVE_TASK_LIST);
+
+                            return Promise.resolve();
+                        })
+
+                    } catch ( error ) {
+                        throw new Error('Could not delete your tasklist')
+                    }
+
                 }
             }
         }
