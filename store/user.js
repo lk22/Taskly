@@ -42,7 +42,7 @@
 					authUser: null,
 					authToken: null,
 					data: {
-
+                        settings: {}
 					}
 				},
 

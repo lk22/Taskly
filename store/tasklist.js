@@ -155,8 +155,8 @@
                 /**
                  * update task list mutation
                  */
-                [types.UPDATE_TASK_LIST](state, tasklist) {
-                    const {name} = tasklist
+                [types.UPDATE_TASK_LIST](state, payload) {
+                    const {name, tasklist} = payload
 
                     if(name) {
                         tasklist.name = name
