@@ -55,7 +55,6 @@ module.exports = {
 		//   }
 		// }
 	},
-	css: ['bulma'],
 
 	generate: {
 		dir: 'public'
@@ -74,6 +73,18 @@ module.exports = {
 	 * modules to use
 	 */
 	modules: [
+
+		/**
+		 * Bootstrap
+		 * @type {[type]}
+		 */
+	    'bootstrap-vue/nuxt',
+
+	    // Or if you have custom bootstrap CSS...
+	    ['bootstrap-vue/nuxt', {
+			css: false
+		}],
+
 		/**
 		 * fontawsome
 		 */

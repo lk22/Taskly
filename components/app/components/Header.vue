@@ -35,11 +35,11 @@ export default {
 <template>
 
     <!-- header wrapper -->
-    <div class="dashboard-header">
+    <div class="dashboard-header container-fluid">
         <!-- columns -->
-        <div class="columns">
+        <div class="container row">
             <!-- left header -->
-            <div class="column is-3 dashboard-header__left">
+            <div class="col col-md-3 dashboard-header__left">
                 <!-- left inner -->
                 <div class="left-inner">
                     <!-- left inner menu -->
@@ -49,7 +49,7 @@ export default {
                 </div> <!-- left inner end -->
             </div> <!-- left header end -->
             <!-- center column-->
-            <div class="column is-6 dashboard-header__center">
+            <div class="col col-md-6 dashboard-header__center">
                 <!-- center inner -->
                 <div class="center-inner">
                     <!-- center inner search bar -->
@@ -57,12 +57,12 @@ export default {
                         <!-- search form -->
                         <form class="searchBar-form" action="#" method="post">
                             <!-- search bar string input field -->
-                            <div class="input-group searchBar-form__string">
+                            <div class="form-group searchBar-form__string">
                                 <input
                                     v-model="searchString"
                                     @click="createSearchFromString"
                                     type="text"
-                                    class="input searchString"
+                                    class="form-control searchString"
                                     name="searchString"
                                     placeholder="Search..."
                                 >
@@ -73,7 +73,7 @@ export default {
             </div> <!-- center column end -->
 
             <!-- right header colomn -->
-            <div class="dashboard-header__right">
+            <div class="col col-md-3 dashboard-header__right">
                 <!-- right inner wrapper -->
                 <div class="right-inner">
                     <!-- right inner user container -->
@@ -97,10 +97,10 @@ export default {
         min-height: 80px;
         width: 100%;
         background: #809ed3;
+        margin:0px;
 
         // left header column
         .dashboard-header__left{
-
             // left header inner
             .left-inner{
                 padding: 1rem;
@@ -171,14 +171,13 @@ export default {
 
         // right header column
         .dashboard-header__right{
-
             // right inner
             .right-inner{
                 padding: 1.5rem;
 
                 // right inner user
                 .right-inner__user{
-                    margin-top: 1rem;
+                    margin-top: 0.5rem;
 
                     // user
                     .user {
