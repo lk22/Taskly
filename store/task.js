@@ -97,38 +97,19 @@ const task = {
 		/**
 		 * updating existing task
 		 */
-		update(context, {
-			name,
-			priority,
-			workHours,
-			id
-		}) {
-
-			const id = state.task.id
+		update(context, payload = { /* payload, update */ }) {
+			// Commit changes in store
+			context.commit(types.UPDATE_TASK, payload);
 
 			// make API request
-			makeRequest('PUT', api + 'tasks/' + id + '/update-task', {
-					name,
-					priority,
-					workHours
-				})
+			return makeRequest('PUT', api + 'tasks/' + payload.task.id + '/update-task', payload.update)
 				.then((response) => {
-					console.log(response);
-
-					const name = name;
-					const priority = priority;
-
-					context.commit(types.UPDATE_TASK, {
-						name,
-						priority,
-						workHours
-					})
-
-					return Promise.resolve();
+					return response.data;
+					// return Promise.resolve(response.data);
 				})
 				.catch((error) {
-					throw new Error(error);
-				})
+					return Promise.reject(error);
+				});
 		},
 
 		/**
@@ -148,13 +129,6 @@ const task = {
 					return Promise.resolve();
 				})
 		},
-
-		/**
-		 * @todo
-		 * 1: add setPriority action Here
-		 * 2: checkoutTask action
-		 * 3: checkAllTasks action
-		 */
 
 		/**
 		 * set priority to task
@@ -193,20 +167,21 @@ const task = {
 		setWorkHours(context, {
 			workHours
 		}) {
+
 			makeRequest('PATCH', api + 'tasks/set-workhour', {
 					work_hours: workHours
 				})
 				.then((response) {
 					console.log(response)
 
-					const workHours = workHours
-
-					context.commit(types.SET_WORK_HOURS, {
-						workHours
-					})
-
 					return Promise.resolve()
 				})
+
+			const workHours
+
+			context.commit(types.SET_WORK_HOURS, {
+				workHours
+			})
 		}
 
 		/**
@@ -264,24 +239,8 @@ const task = {
 		 * @type {Boolean}
 		 */
         [UPDATE_TASK](state, payload) {
-			const {
-				name,
-				priority,
-				workHours,
-				task
-			} = payload
-
-			if (name) {
-				task.name = name
-			}
-
-			if (priority) {
-				task.priority = priority
-			}
-
-			if (workHours) {
-				task.workHours = workHours
-			}
+			// merge the task and update objects to one object
+			payload.task = Object.assign(payload.task, payload.update);
 		},
 
 		/**
