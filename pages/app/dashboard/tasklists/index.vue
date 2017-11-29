@@ -70,11 +70,7 @@
                       <tr>
                           <td id="tasklist-name-open">
                               {{ tasklist.name }}
-                              <b-popover triggers="click" target="tasklist-name-open" title="Popover">
-                                  I start <strong>open</strong>
-                              </b-popover>
                           </td>
-
                           <td>{{ tasklist.tasks_count }}</td>
                       </tr>
                   </tbody>
