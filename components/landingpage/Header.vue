@@ -1,12 +1,12 @@
 <template>
-	<div class="header taskly-header">
-		<div class="columns">
-			<div class="column is-9 navbrand">
+	<div class="container-fluid header taskly-header">
+		<div class="row">
+			<div class="col col-md-9 navbrand">
 				<h1 class="header-navbrand">
 					<nuxt-link to="/">Taskly</nuxt-link>
 				</h1>
 			</div>
-			<div class="column is-3 navlist">
+			<div class="col col-md-3 navlist">
 				<ul class="header-navlist">
 					<li class="header-navlist__item">
 						<nuxt-link to="/login">Sign in</nuxt-link>

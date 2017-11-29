@@ -73,7 +73,7 @@ export default {
         <form v-if="!$store.state.authUser" @submit.prevent="login" class="login-container__form" method="post">
 
             <!-- email input group -->
-            <div class="input-group">
+            <div class="form-group">
 
                 <!-- label -->
                 <label for="email">
@@ -81,11 +81,11 @@ export default {
                 </label><!-- label end -->
 
                 <!-- email input -->
-                <input v-model="username" name="username" type="email" class="input" placeholder="Enter email address" >
+                <input v-model="username" name="username" type="email" class="form-control username" placeholder="Enter email address" >
             </div><!-- email input group -->
 
             <!-- password input group -->
-            <div class="input-group">
+            <div class="form-group">
 
                 <!-- label -->
                 <label for="password">
@@ -93,12 +93,12 @@ export default {
                 </label><!-- label end -->
 
                 <!-- password input -->
-                <input v-model="password" name="password" type="password" class="input" placeholder="Enter password" >
+                <input v-model="password" name="password" type="password" class="form-control password" placeholder="Enter password" >
             </div>
 
             <!-- submit button group -->
-            <div class="submit-group">
-                <input type="submit" class="button is-primary" value="login">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="login">
             </div>
         </form><!-- login form -->
         <div class="login-container__error" v-if="error">
@@ -115,10 +115,10 @@ export default {
     .login-container__form-container__form{
         .login-container__form {
 
-            .input-group{
+            .form-group{
                 margin-bottom:2rem;
 
-                .input{
+                .username, .password{
                     height: 40px;
                     border-radius: 0%;
                     color: #fff;
@@ -157,8 +157,8 @@ export default {
                 }
             }
 
-            .submit-group{
-                .button{
+            .form-group{
+                .btn{
                     border-radius: 0%;
                     background: #809ed3;
                     width: 100%;
