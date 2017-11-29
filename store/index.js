@@ -1,7 +1,7 @@
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import user from './user'
-import search from './search',
+import search from './search'
 import tasklist from './tasklist'
 import task from './task'
 

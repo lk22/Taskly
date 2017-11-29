@@ -25,7 +25,8 @@ const types = {
 	REMOVE_TASK: 'REMOVE_TASK',
 	SET_PRIORITY: 'SET_PRIORITY',
 	CHECKOUT_TASK: 'CHECKOUT_TASK',
-	CHECKOUT_ALL_TASKS: 'CHECKOUT_ALL_TASKS'
+	CHECKOUT_ALL_TASKS: 'CHECKOUT_ALL_TASKS',
+	SET_WORK_HOURS: 'SET_WORK_HOURS'
 }
 
 
@@ -186,6 +187,29 @@ const task = {
 		},
 
 		/**
+		 * set work hours
+		 * @type {[type]}
+		 */
+		setWorkHours(context, {
+			workHours
+		}) {
+			makeRequest('PATCH', api + 'tasks/set-workhour', {
+					work_hours: workHours
+				})
+				.then((response) {
+					console.log(response)
+
+					const workHours = workHours
+
+					context.commit(types.SET_WORK_HOURS, {
+						workHours
+					})
+
+					return Promise.resolve()
+				})
+		}
+
+		/**
 		 * checkout task
 		 * @type {Object}
 		 */
@@ -196,9 +220,9 @@ const task = {
 
 			makeRequest('PATCH', api + 'tasks/' + id + '/checkout-task', {})
 				.then((response) => {
-					console.log(response);
+					console.log(response)
 
-					context.commit(types.CHECKOUT_TASK);
+					context.commit(types.CHECKOUT_TASK)
 				})
 				.catch((error) => {
 					throw new Error(error)
@@ -213,14 +237,14 @@ const task = {
 
 			makeRequest('PATCH', api + 'tasks/check-all')
 				.then((response) => {
-					console.log(response);
+					console.log(response)
 
-					context.commit(types.CHECKOUT_ALL_TASKS);
+					context.commit(types.CHECKOUT_ALL_TASKS)
 
-					return Promise.resolve();
+					return Promise.resolve()
 				})
 				.catch((error) => {
-					throw new Error(error);
+					throw new Error(error)
 				})
 		}
 	},
@@ -272,12 +296,24 @@ const task = {
 		 * patching priority
 		 * @type {Boolean}
 		 */
-		[types.SET_PRIORITY](state, payload) {
+		[types.SET_PRIORITY](state, task) {
 			const {
 				priority
 			} = payload
 			state.items.filter(item => item.priority === task.priority)
 		},
+
+		/**
+		 * set new work hours limit
+		 * @type {[type]}
+		 */
+		[types.SET_WORK_HOURS](state, task) {
+			const {
+				workHours
+			} = task
+
+			state.items.filter(item => item.work_hours === task.work_hours)
+		}
 
 		/**
 		 * checkout single task mutation

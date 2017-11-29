@@ -11,13 +11,18 @@
                 "generate": "nuxt generate",
                 "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
                 "precommit": "npm run lint",
-                "test": "ava"
+                "test": "jest"
         },
-
-        "ava": {
-                "require": [
-                        "babel-register"
-                ]
+        "jest": {
+                "moduleFileExtensions": [
+                        "js",
+                        "json",
+                        "vue"
+                ],
+                "transform": {
+                        ".*\\.(vue)$": "<rootDir>/node_modules/jes-vue"
+                },
+                "mapCoverage": true
         },
         "babel": {
                 "presets": [
@@ -27,12 +32,17 @@
         "dependencies": {
                 "ava": "^0.24.0",
                 "axios": "^0.17.0",
+                "babel-jest": "^21.2.0",
                 "bulma": "^0.6.1",
                 "cors": "^2.8.4",
+                "jest": "^21.2.1",
+                "jest-serializer-vue": "^0.3.0",
                 "jsdom": "^11.5.1",
                 "node-sass": "^4.6.0",
                 "nuxt": "^1.0.0-rc11",
                 "sass-loader": "^6.0.6",
+                "vue-jest": "^1.2.0",
+                "vue-test-utils": "^1.0.0-beta.6",
                 "vuex-persistedstate": "^2.3.2"
         },
         "devDependencies": {

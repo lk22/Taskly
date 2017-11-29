@@ -162,7 +162,7 @@ const user = {
 		/**
 		 * set user state mutation
 		 */
-					[types.SET_USER](state, user) {
+		[types.SET_USER](state, user) {
 			state.data = user;
 		}
 	},
