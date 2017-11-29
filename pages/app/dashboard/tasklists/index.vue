@@ -59,7 +59,7 @@
         <!-- wrap this list in a seperate component -->
         <div class="tasklists-container__list">
           <div class="tasklist" v-if="tasklists" v-for="tasklist in tasklists">
-              <table class="tasklist-table">
+              <table class="table table-hover tasklist-table">
                   <thead class="tasklist-table__header">
                       <tr class="tasklist-table__heading">
                           <td class="heading-name">name</td>
@@ -68,7 +68,13 @@
                   </thead>
                   <tbody>
                       <tr>
-                          <td>{{ tasklist.name }}</td>
+                          <td id="tasklist-name-open">
+                              {{ tasklist.name }}
+                              <b-popover triggers="click" target="tasklist-name-open" title="Popover">
+                                  I start <strong>open</strong>
+                              </b-popover>
+                          </td>
+
                           <td>{{ tasklist.tasks_count }}</td>
                       </tr>
                   </tbody>

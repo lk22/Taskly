@@ -1,8 +1,28 @@
 <script>
     import TasklyHeader from '~/components/app/components/Header'
+
+    /**
+     * bootstrap components
+     * @type {String}
+     */
+    import {
+        Button, // button component
+        Popover, // popover component
+        Badge, // badge component
+        Alert // alert component
+    } from 'bootstrap-vue/es/components';
+
+
     export default {
         components: {
-            TasklyHeader
+            // Taskly specific components
+            TasklyHeader,
+
+            // Bootstrap components
+            Badge,
+            Popover,
+            Button,
+            Alert
         }
     }
 
