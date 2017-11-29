@@ -97,13 +97,14 @@ const task = {
 		update(context, {
 			name,
 			priority,
+			workHours,
 			id
 		}) {
 
 			const id = state.task.id
 
 			// make API request
-			makeRequest('POST', api + 'tasks/' + id + '/update-task', {
+			makeRequest('PUT', api + 'tasks/' + id + '/update-task', {
 					name,
 					priority
 				})
@@ -133,7 +134,7 @@ const task = {
 		}) {
 
 			const id = state.task.id;
-			makeRequest('POST', api + 'tasks/' + id + '/delete-task', {})
+			makeRequest('DELETE', api + 'tasks/' + id + '/delete-task')
 				.then((response) => {
 					console.log(response);
 
@@ -161,7 +162,7 @@ const task = {
 			id
 		}) {
 			const id = state.task.id
-			makeRequest('POST', api + 'tasks/' + id + '/set-priority', {
+			makeRequest('PATCH', api + 'tasks/' + id + '/set-priority', {
 					priority
 				})
 				.then((response) => {
@@ -206,7 +207,7 @@ const task = {
 		 */
 		checkoutAllTasks(context) {
 
-			makeRequest('POST', api + 'tasks/check-all')
+			makeRequest('PATCH', api + 'tasks/check-all')
 				.then((response) => {
 					console.log(response);
 
@@ -238,6 +239,7 @@ const task = {
 			const {
 				name,
 				priority,
+				workHours,
 				task
 			} = payload
 
@@ -247,6 +249,10 @@ const task = {
 
 			if (priority) {
 				task.priority = priority
+			}
+
+			if (workHours) {
+				task.workHours = workHours
 			}
 		},
 
