@@ -87,7 +87,7 @@ const task = {
 
 					return Promise.resolve();
 				})
-				.catch((error) {
+				.catch((error) => {
 					throw new Error(error)
 				})
 
@@ -107,7 +107,7 @@ const task = {
 					return response.data;
 					// return Promise.resolve(response.data);
 				})
-				.catch((error) {
+				.catch((error) => {
 					return Promise.reject(error);
 				});
 		},
@@ -119,7 +119,6 @@ const task = {
 			id
 		}) {
 
-			const id = state.task.id;
 			makeRequest('DELETE', api + 'tasks/' + id + '/delete-task')
 				.then((response) => {
 					console.log(response);
@@ -140,7 +139,6 @@ const task = {
 			priority,
 			id
 		}) {
-			const id = state.task.id
 			makeRequest('PATCH', api + 'tasks/' + id + '/set-priority', {
 					priority
 				})
@@ -171,18 +169,17 @@ const task = {
 			makeRequest('PATCH', api + 'tasks/set-workhour', {
 					work_hours: workHours
 				})
-				.then((response) {
+				.then((response) => {
 					console.log(response)
 
 					return Promise.resolve()
 				})
 
-			const workHours
-
+			// const workHours = workHours
 			context.commit(types.SET_WORK_HOURS, {
 				workHours
 			})
-		}
+		},
 
 		/**
 		 * checkout task
@@ -191,7 +188,6 @@ const task = {
 		checkoutTask(context, {
 			id
 		}) {
-			const id = state.task.id
 
 			makeRequest('PATCH', api + 'tasks/' + id + '/checkout-task', {})
 				.then((response) => {
@@ -210,7 +206,7 @@ const task = {
 		 */
 		checkoutAllTasks(context) {
 
-			makeRequest('PATCH', api + 'tasks/check-all')
+			return makeRequest('PATCH', api + 'tasks/check-all')
 				.then((response) => {
 					console.log(response)
 
@@ -230,7 +226,7 @@ const task = {
 		 * create task mutation
 		 * @type {Boolean}
 		 */
-        [ADD_NEW_TASK](state, payload) {
+        [types.ADD_NEW_TASK](state, payload) {
 			state.items = [task].concat(state.items)
 		},
 
@@ -238,7 +234,7 @@ const task = {
 		 * updating existing task mutation
 		 * @type {Boolean}
 		 */
-        [UPDATE_TASK](state, payload) {
+        [types.UPDATE_TASK](state, payload) {
 			// merge the task and update objects to one object
 			payload.task = Object.assign(payload.task, payload.update);
 		},
@@ -247,7 +243,7 @@ const task = {
 		 * removing task
 		 * @type {Boolean}
 		 */
-        [REMOVE_TASK](state, task) {
+        [types.REMOVE_TASK](state, task) {
 			state.items = state.items.filter(item => item.id !== task.id)
 		},
 
@@ -272,7 +268,7 @@ const task = {
 			} = task
 
 			state.items.filter(item => item.work_hours === task.work_hours)
-		}
+		},
 
 		/**
 		 * checkout single task mutation
@@ -291,7 +287,7 @@ const task = {
 		}
 
 	},
-	namespaced: true;
+	namespaced: true
 }
 
 

@@ -15,7 +15,7 @@ const createStore = () => new Vuex.Store({
 	modules: {
 		user,
 		search,
-		tasklist
+		tasklist,
 		task
 	},
 	plugins: [
