@@ -63,7 +63,8 @@ const task = {
 		 */
 		create(context, {
 			name,
-			priority
+			priority,
+			workHours
 		}) {
 
 			// make API request
@@ -79,7 +80,8 @@ const task = {
 
 					context.commit(types.ADD_NEW_TASK, {
 						name,
-						priority
+						priority,
+						workHours
 					})
 
 					return Promise.resolve();
@@ -106,7 +108,8 @@ const task = {
 			// make API request
 			makeRequest('PUT', api + 'tasks/' + id + '/update-task', {
 					name,
-					priority
+					priority,
+					workHours
 				})
 				.then((response) => {
 					console.log(response);
@@ -116,7 +119,8 @@ const task = {
 
 					context.commit(types.UPDATE_TASK, {
 						name,
-						priority
+						priority,
+						workHours
 					})
 
 					return Promise.resolve();
@@ -261,8 +265,35 @@ const task = {
 		 * @type {Boolean}
 		 */
         [REMOVE_TASK](state, task) {
-			state.items = state.items(item => item.id !== task.id)
+			state.items = state.items.filter(item => item.id !== task.id)
 		},
+
+		/**
+		 * patching priority
+		 * @type {Boolean}
+		 */
+		[types.SET_PRIORITY](state, payload) {
+			const {
+				priority
+			} = payload
+			state.items.filter(item => item.priority === task.priority)
+		},
+
+		/**
+		 * checkout single task mutation
+		 * @type {[type]}
+		 */
+		[types.CHECKOUT_TASK](state, task) {
+			state.items.filter(item => item.is_checked === task.is_checked)
+		},
+
+		/**
+		 * checkout all tasks
+		 * @type {[type]}
+		 */
+		[types.CHECKOUT_ALL_TASKS](state, task) {
+			state.items = state.items.filter(item => item.is_checked !== task.is_checked)
+		}
 
 	},
 	namespaced: true;
