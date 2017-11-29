@@ -189,7 +189,7 @@ const task = {
 		}) {
 			const id = state.task.id
 
-			makeRequest('POST', api + 'tasks/' + id + '/checkout-task', {})
+			makeRequest('PATCH', api + 'tasks/' + id + '/checkout-task', {})
 				.then((response) => {
 					console.log(response);
 
