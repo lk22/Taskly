@@ -3,15 +3,15 @@
  */
 
 
-        import Vuex from 'vuex'
+import Vuex from 'vuex'
 
-        import {
-            makeRequest
-        } from '~/globals'
+import {
+	makeRequest
+} from '~/globals'
 
-        import {
-            api
-        } from '~/globals/API/endpoints'
+import {
+	api
+} from '~/globals/API/endpoints'
 
 
 /**
@@ -19,14 +19,14 @@
  */
 
 
-        const types = {
-            ADD_NEW_TASK: 'ADD_NEW_TASK',
-            UPDATE_TASK: 'UPDATE_TASK',
-            REMOVE_TASK: 'REMOVE_TASK',
-            SET_PRIORITY: 'SET_PRIORITY',
-            CHECKOUT_TASK: 'CHECKOUT_TASK',
-            CHECKOUT_ALL_TASKS: 'CHECKOUT_ALL_TASKS'
-        }
+const types = {
+	ADD_NEW_TASK: 'ADD_NEW_TASK',
+	UPDATE_TASK: 'UPDATE_TASK',
+	REMOVE_TASK: 'REMOVE_TASK',
+	SET_PRIORITY: 'SET_PRIORITY',
+	CHECKOUT_TASK: 'CHECKOUT_TASK',
+	CHECKOUT_ALL_TASKS: 'CHECKOUT_ALL_TASKS'
+}
 
 
 /**
@@ -34,215 +34,233 @@
  */
 
 
-        const task = {
-            /**
-             * State object
-             */
-            state: {
-                items: [],
-                task:{}
-            },
+const task = {
+	/**
+	 * State object
+	 */
+	state: {
+		items: [],
+		task: {}
+	},
 
-            /**
-             * getter methods
-             */
-            getters: {
-                getTasks: state => {
-                    return state.items
-                },
+	/**
+	 * getter methods
+	 */
+	getters: {
+		getTasks: state => {
+			return state.items
+		},
 
-                getTask: state => (id) => {
-                    return state.items.filter(task => task.id === id)
-                }
-            },
+		getTask: state => (id) => {
+			return state.items.filter(task => task.id === id)
+		}
+	},
 
-            actions: {
+	actions: {
 
-                /**
-                 * creating a new task
-                 */
-                create(context, {name, priority}) {
+		/**
+		 * creating a new task
+		 */
+		create(context, {
+			name,
+			priority
+		}) {
 
-                    // make API request
-                    try {
+			// make API request
+			makeRequest('POST', api + 'tasks/create-task', {
+					name,
+					priority
+				})
+				.then((response) => {
+					console.log(response);
 
-                        makeRequest('POST', api + 'tasks/create-task', {
-                            name,
-                            priority
-                        }).then( (response) => {
-                            console.log(response);
+					const name = name;
+					const priority = priority;
 
-                            const name = name;
-                            const priority = priority;
+					context.commit(types.ADD_NEW_TASK, {
+						name,
+						priority
+					})
 
-                            context.commit(types.ADD_NEW_TASK, {
-                                name,
-                                priority
-                            })
+					return Promise.resolve();
+				})
+				.catch((error) {
+					throw new Error(error)
+				})
 
-                            return Promise.resolve();
-                        })
-
-                    } catch ( error ) {
-                        // throw error here
-                    }
-                },
+		},
 
 
-                /**
-                 * updating existing task
-                 */
-                update(context, {name, priority, id}) {
+		/**
+		 * updating existing task
+		 */
+		update(context, {
+			name,
+			priority,
+			id
+		}) {
 
-                    const id = state.task.id
+			const id = state.task.id
 
-                    // make API request
-                    try {
+			// make API request
+			makeRequest('POST', api + 'tasks/' + id + '/update-task', {
+					name,
+					priority
+				})
+				.then((response) => {
+					console.log(response);
 
-                        makeRequest('POST', api + 'tasks/' + id + '/update-task', {
-                            name,
-                            priority
-                        }).then((response) => {
-                            console.log(response);
+					const name = name;
+					const priority = priority;
 
-                            const name = name;
-                            const priority = priority;
+					context.commit(types.UPDATE_TASK, {
+						name,
+						priority
+					})
 
-                            context.commit(types.UPDATE_TASK, {
-                                name,
-                                priority
-                            })
+					return Promise.resolve();
+				})
+				.catch((error) {
+					throw new Error(error);
+				})
+		},
 
-                            return Promise.resolve();
-                        })
-                    } catch (error) {
+		/**
+		 * remove existing task
+		 */
+		delete(context, {
+			id
+		}) {
 
-                    }
-                },
+			const id = state.task.id;
+			makeRequest('POST', api + 'tasks/' + id + '/delete-task', {})
+				.then((response) => {
+					console.log(response);
 
-                /**
-                 * remove existing task
-                 */
-                delete(context, {id}) {
+					context.commit(types.REMOVE_TASK);
 
-                    const id = state.task.id;
+					return Promise.resolve();
+				})
+		},
 
-                    try {
+		/**
+		 * @todo
+		 * 1: add setPriority action Here
+		 * 2: checkoutTask action
+		 * 3: checkAllTasks action
+		 */
 
-                        makeRequest('POST', api + 'tasks/' + id + '/delete-task', {}).then((response) => {
-                            console.log(response);
+		/**
+		 * set priority to task
+		 * @param {[type]} context  [description]
+		 * @param {[type]} priority [description]
+		 * @param {[type]} id       [description]
+		 */
+		setPriority(context, {
+			priority,
+			id
+		}) {
+			const id = state.task.id
+			makeRequest('POST', api + 'tasks/' + id + '/set-priority', {
+					priority
+				})
+				.then((response) => {
+					console.log(response)
 
-                            context.commit(types.REMOVE_TASK);
+					const priority = priority
 
-                            return Promise.resolve();
-                        })
+					context.commit(types.SET_PRIORITY, {
+						priority
+					})
+				})
+				.catch((error) => {
+					console.log(error);
 
-                    } catch (error) {}
+					throw new Error(error);
+				})
+		},
 
-                },
+		/**
+		 * checkout task
+		 * @type {Object}
+		 */
+		checkoutTask(context, {
+			id
+		}) {
+			const id = state.task.id
 
-                /**
-                 * @todo
-                 * 1: add setPriority action Here
-                 * 2: checkoutTask action
-                 * 3: checkAllTasks action
-                 */
+			makeRequest('POST', api + 'tasks/' + id + '/checkout-task', {})
+				.then((response) => {
+					console.log(response);
 
-                /**
-                 * set priority to task
-                 * @param {[type]} context  [description]
-                 * @param {[type]} priority [description]
-                 * @param {[type]} id       [description]
-                 */
-                setPriority(context, {priority, id}) {
-                    const id = state.task.id
-                    makeRequest('POST', api + 'tasks/' + id + '/set-priority', {
-                        priority
-                    }).then( (response) => {
-                        console.log(response)
+					context.commit(types.CHECKOUT_TASK);
+				})
+				.catch((error) => {
+					throw new Error(error)
+				})
+		},
 
-                        const priority = priority
+		/**
+		 * checkout all tasks
+		 * @type {Object}
+		 */
+		checkoutAllTasks(context) {
 
-                        context.commit(types.SET_PRIORITY, {
-                            priority
-                        })
-                    }).catch((error) => {
-                        console.log(error);
+			makeRequest('POST', api + 'tasks/check-all')
+				.then((response) => {
+					console.log(response);
 
-                        throw new Error(error);
-                    })
-                },
+					context.commit(types.CHECKOUT_ALL_TASKS);
 
-                /**
-                 * checkout task
-                 * @type {Object}
-                 */
-                checkoutTask(context, {id}) {
-                    const id = state.task.id
+					return Promise.resolve();
+				})
+				.catch((error) => {
+					throw new Error(error);
+				})
+		}
+	},
 
-                    makeRequest('POST', api + 'tasks/' + id + '/checkout-task', {}).then((response) => {
-                        console.log(response);
+	mutations: {
 
-                        context.commit(types.CHECKOUT_TASK);
-                    }).catch((error) => {
-                        throw new Error(error)
-                    })
-                },
+		/**
+		 * create task mutation
+		 * @type {Boolean}
+		 */
+        [ADD_NEW_TASK](state, payload) {
+			state.items = [task].concat(state.items)
+		},
 
-                /**
-                 * checkout all tasks
-                 * @type {Object}
-                 */
-                checkoutAllTasks(context) {
-                    makeRequest('POST', api + 'tasks/check-all').then((response) => {
-                        console.log(response);
+		/**
+		 * updating existing task mutation
+		 * @type {Boolean}
+		 */
+        [UPDATE_TASK](state, payload) {
+			const {
+				name,
+				priority,
+				task
+			} = payload
 
-                        context.commit(types.CHECKOUT_ALL_TASKS);
+			if (name) {
+				task.name = name
+			}
 
-                        return Promise.resolve();
-                    }).catch((error) => {
-                        throw new Error(error);
-                    })
-                }
-            },
+			if (priority) {
+				task.priority = priority
+			}
+		},
 
-            mutations: {
+		/**
+		 * removing task
+		 * @type {Boolean}
+		 */
+        [REMOVE_TASK](state, task) {
+			state.items = state.items(item => item.id !== task.id)
+		},
 
-                /**
-                 * create task mutation
-                 * @type {Boolean}
-                 */
-                [ADD_NEW_TASK](state, payload) {
-                    state.items = [task].concat(state.items)
-                },
-
-                /**
-                 * updating existing task mutation
-                 * @type {Boolean}
-                 */
-                [UPDATE_TASK](state, payload) {
-                    const {name, priority, task} = payload
-
-                    if( name ) {
-                        task.name = name
-                    }
-
-                    if( priority ) {
-                        task.priority = priority
-                    }
-                },
-
-                /**
-                 * removing task
-                 * @type {Boolean}
-                 */
-                [REMOVE_TASK](state, task) {
-                    state.items = state.items(item => item.id !== task.id)
-                },
-                
-            },
-            namespaced: true;
-        }
+	},
+	namespaced: true;
+}
 
 
 export default task
