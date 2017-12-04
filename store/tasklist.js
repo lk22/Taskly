@@ -92,27 +92,23 @@ const tasklist = {
 		create(context, {
 			name
 		}) {
-			try {
+			console.log(name)
 
-				makeRequest('POST', api.tasklists.createTasklist, {
+
+
+				return makeRequest('POST', api + 'tasklists/create-tasklist', {
 						name
 					})
 					.then((response) => {
 						console.log(response);
 
-						const name = name;
 						context.commit(types.ADD_TASK_LIST, {
 							name
 						});
-
 						// extending request
 						return Promise.resolve();
 
 					})
-
-			} catch (error) {
-				// throw error
-			}
 
 		},
 
@@ -158,7 +154,7 @@ const tasklist = {
 
 			try {
 
-				makeRequest('POST', api + 'tasklists/' + id + '/delete-tasklist')
+				makeRequest('DELETE', api + 'tasklists/' + id + '/delete-tasklist')
 					.then((response) => {
 						console.log(response);
 
@@ -204,7 +200,7 @@ const tasklist = {
 		 * removing tasklist mutation
 		 */
         [types.REMOVE_TASK_LIST](state, tasklist) {
-			state.items = state.items.filter(item => item.id !== todo.id)
+			state.items = state.items.filter(item => item.id !== tasklist.id)
 		},
 
 		[types.SET_TASKLISTS](state, payload) {

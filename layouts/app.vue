@@ -9,7 +9,10 @@
         Button, // button component
         Popover, // popover component
         Badge, // badge component
-        Alert // alert component
+        Alert, // alert component
+        Dropdown,
+        Modal,
+        Form
     } from 'bootstrap-vue/es/components';
 
 
