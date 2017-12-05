@@ -35,7 +35,9 @@
         methods: {
             removeTasklist(id) {
                 try {
-                    this.$store.dispatch('tasklist/delete', {id})
+                    this.$store.dispatch('tasklist/delete', {id}).then((response) => {
+                        this.$store.dispatch('tasklist/getTasklists')
+                    })
                 } catch ( error ) {
                     this.error = error
                 }
@@ -127,7 +129,7 @@
 
         <!-- wrap this list in a seperate component -->
         <div class="container tasklists-container__list">
-          <div class="tasklist" v-if="tasklists" >
+          <div class="tasklist" v-if="tasklists">
               <table class="table table-light table-responsive-md tasklist-table">
                   <thead class="thead-dark tasklist-table__header">
                       <tr class="tasklist-table__heading">
@@ -146,6 +148,9 @@
                       </tr>
                   </tbody>
               </table>
+          </div>
+          <div class="no-tasklists container-fluid" v-if="!tasklists">
+              <h4 class="text-center">You have no tasklists assigned</h4>
           </div>
         </div>
 
@@ -220,7 +225,6 @@
 
         .tasklists-container__list{
             padding:1.5rem;
-            overflow-y: scroll;
 
             .tasklist{
                 margin-left:10rem;

@@ -51,7 +51,7 @@ export default {
                         username: this.username,
                         password: this.password
                     }).then(() => {
-                        this.$router.replace({path: '/app'})
+                        this.$router.replace({path: '/app/dashboard/tasklists'})
                     })
 
             }

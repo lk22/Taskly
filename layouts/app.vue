@@ -19,7 +19,7 @@
     export default {
         components: {
             // Taskly specific components
-            TasklyHeader,
+            //TasklyHeader,
 
             // Bootstrap components
             Badge,
@@ -36,7 +36,7 @@
     <div class="app dashboard-wrapper">
 
         <!-- app header-->
-        <TasklyHeader/>
+        <!--<TasklyHeader/>-->
 
         <!-- inner container -->
         <div class="dashboard-wrapper__inner">

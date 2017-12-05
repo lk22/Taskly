@@ -227,7 +227,7 @@ const task = {
 		 * @type {Boolean}
 		 */
         [types.ADD_NEW_TASK](state, payload) {
-			state.items = [task].concat(state.items)
+			state.items = [payload].concat(state.items)
 		},
 
 		/**

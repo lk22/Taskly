@@ -102,14 +102,14 @@ const tasklist = {
 					.then((response) => {
 						console.log(response);
 
-						context.commit(types.ADD_TASK_LIST, {
-							name
-						});
 						// extending request
 						return Promise.resolve();
 
 					})
 
+					context.commit(types.ADD_TASK_LIST, {
+						name
+					})
 		},
 
 		/**
@@ -122,16 +122,15 @@ const tasklist = {
 			name
 		}) {
 
+			context.commit(types.UPDATE_TASK_LIST, {
+				name
+			})
+
 			try {
 
-				makeRequest('POST', api + 'tasklists/' + state.tasklists.slug + 'update-tasklist')
+				makeRequest('PUT', api + 'tasklists/' + state.tasklists.slug + 'update-tasklist')
 					.then((response) => {
 						console.log(response);
-
-						const name = name
-						context.commit(types.UPDATE_TASK_LIST, {
-							name
-						})
 
 						// extending request
 						return Promist.resolve();
@@ -158,7 +157,7 @@ const tasklist = {
 					.then((response) => {
 						console.log(response);
 
-						context.commit(types.REMOVE_TASK_LIST);
+							context.commit(types.REMOVE_TASK_LIST);
 
 						return Promise.resolve();
 					})
@@ -166,6 +165,8 @@ const tasklist = {
 			} catch (error) {
 				throw new Error('Could not delete your tasklist')
 			}
+
+			//context.commit(types.REMOVE_TASK_LIST);
 
 		}
 	},
@@ -199,8 +200,8 @@ const tasklist = {
 		/**
 		 * removing tasklist mutation
 		 */
-        [types.REMOVE_TASK_LIST](state, tasklist) {
-			state.items = state.items.filter(item => item.id !== tasklist.id)
+        [types.REMOVE_TASK_LIST](state, id) {
+			state.items = state.items.filter(item => item.id !== id)
 		},
 
 		[types.SET_TASKLISTS](state, payload) {
