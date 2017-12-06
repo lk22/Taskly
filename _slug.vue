@@ -11,7 +11,8 @@
             // return state
             return {
                 // error message
-                error: ''
+                error: '',
+                noTasksMsg : 'You have currently no tasks assigned to this tasklist'
             }
         },
 
@@ -118,23 +119,7 @@
 </script>
 
 <template lang="html">
-  <!-- task-container -->
-  <div class="container-fluid task-container">
-      <!-- header -->
-      <div class="row tasks-container__header">
-          <div class="col-10 header-tasklist__name">
-              <!-- tasklist name here -->
-          </div>
-          <div class="col-2 header-tasklist__settings">
-              <!-- configuration icon button fa-cog -->
-          </div>
-      </div>
-      <!-- tasks list wrapper -->
-      <div class="row tasks-container__body">
 
-      </div>
-
-  </div>
 </template>
 
 <style lang="scss">
