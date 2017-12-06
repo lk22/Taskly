@@ -93,9 +93,7 @@ const tasklist = {
 			name
 		}) {
 			console.log(name)
-
-
-
+			
 				return makeRequest('POST', api + 'tasklists/create-tasklist', {
 						name
 					})

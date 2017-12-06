@@ -54,7 +54,7 @@
                     this.name = document.getElementById('name').value
                     console.log(this.name)
                     this.$store.dispatch('tasklist/create', this.name).then((response) => {
-                        this.error = response
+                        this.$store.dispatch('tasklist/getTasklists')
                     })
                 }
             },
@@ -145,6 +145,7 @@
                           <td class="row-created_at">{{ tasklist.created_at }}</td>
                           <td class="row-archive"><i v-on:click="removeTasklist(tasklist.id)" class="fa fa-archive"></i></td>
                           <td class="row-edit"><i class="fa fa-pencil"></i></td>
+                          </td>
                       </tr>
                   </tbody>
               </table>
@@ -155,7 +156,7 @@
         </div>
 
         <!-- bootstrap modal component -->
-        <b-modal ref="tasklistsModalRef"
+        <b-modal refs="tasklistsModalRef"
                  @ok="createTasklist"
                  id="modalPrevent"
                 title="New tasklist"
@@ -218,7 +219,6 @@
                     color: #000;
                     border:none;
                     box-shadow: none;
-
                 }
             }
         }
@@ -237,11 +237,19 @@
                         }
                     }
 
-                    .tasklist-table-body{
+                    .tasklist-table__body{
                         .body-row{
                             // archive button
                             .row-archive{
-                                color: #809ed3;
+                                .fa.fa-archive{
+                                        color: #809ed3;
+                                }
+                            }
+
+                            .row-edit {
+                                .fa-pencil{
+                                    color: #809ed3;
+                                }
                             }
                         }
                     }
