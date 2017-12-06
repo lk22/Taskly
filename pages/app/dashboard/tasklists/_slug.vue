@@ -9,7 +9,6 @@
          * |----------------------------------------
          */
         data() {
-
             // return state
             return {
                 // error message
@@ -91,8 +90,8 @@
         computed: {
 
             // tasks property
-            tasks() {
-                // dispatch getter method to fetch every task
+            tasklist() {
+                this.$store.getters['tasklist/fetchTasklist']
             }
         },
 
@@ -104,6 +103,7 @@
          */
         beforeMount() {
             // dispatch action to fetch every task on a list
+            this.$store.dispatch('tasklist/getTasklist')
         },
 
         /**
@@ -133,24 +133,24 @@
   <div class="container tasks-container">
       <!-- header -->
       <div class="row tasks-container__header">
-          <div class="col-10 header-tasklist__name">
+          <div class="col-11 header-tasklist__name">
               <!-- tasklist name here -->
               <h4>tasklist</h4>
           </div>
-          <div class="col-2 header-tasklist__settings">
+          <div class="col-1 header-tasklist__settings">
               <!-- configuration icon button fa-cog -->
               <i class="fa fa-cog"></i>
           </div>
       </div>
       <!-- tasks list wrapper -->
-      <div class="row tasks-container__body" v-if="tasks">
+      <div class="row tasks-container__body" v-if="tasklist">
 
       </div>
 
-      <div class="row no-tasks-container">
+      <div v-if="!tasklist" class="row no-tasks-container">
           <b-alert variant="info" show>
               <h4 class="text-center">{{ noTasksMsg }}</h4>
-              <div class="create-task">
+              <div class="create-task-button">
                   <h5>Create your new tasklist here</h5>
                   <b-button v-on:click="openCreateNewTaskModal" variant="primary">Create Tasklist</b-button>
               </div>
