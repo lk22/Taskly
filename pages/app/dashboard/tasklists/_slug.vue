@@ -88,10 +88,9 @@
          * |----------------------------------------
          */
         computed: {
-
             // tasks property
             tasklist() {
-                this.$store.getters['tasklist/fetchTasklist']
+                this.$store.getters['tasklist/getSingleTasklist']
             }
         },
 
@@ -103,7 +102,7 @@
          */
         beforeMount() {
             // dispatch action to fetch every task on a list
-            this.$store.dispatch('tasklist/getTasklist')
+            //console.log($route.params._slug)
         },
 
         /**
@@ -122,9 +121,11 @@
          * |    @return {[type]} [description]
          * |----------------------------------------
          */
-        validate ({params}) {
-            return params
-        }
+        //  validate ({ params }) {
+        //      // Must be a number
+        //      // console.log( /^\d+$/.test(params.id))
+        //
+        // }
     }
 </script>
 
@@ -144,7 +145,7 @@
       </div>
       <!-- tasks list wrapper -->
       <div class="row tasks-container__body" v-if="tasklist">
-
+          <!-- task listing  -->
       </div>
 
       <div v-if="!tasklist" class="row no-tasks-container">

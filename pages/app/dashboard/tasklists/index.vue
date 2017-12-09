@@ -54,7 +54,7 @@
                     this.name = document.getElementById('name').value
                     console.log(this.name)
                     this.$store.dispatch('tasklist/create', this.name).then((response) => {
-                        this.$store.dispatch('tasklist/getTasklists')
+                        //this.$store.dispatch('tasklist/getTasklists')
                     })
                 }
             },
@@ -101,6 +101,10 @@
                 // fetch all tasklists
                 return this.$store.getters['tasklist/getTasklists']
             }
+        },
+
+        validate ({params}) {
+            return params
         }
     }
 </script>
@@ -196,7 +200,7 @@
         <div class="success-container" v-if="success">
             <b-alert show variant="success">{{success}}</b-alert>
         </div>
-        
+        <nuxt-child/>
     </div>
 
 

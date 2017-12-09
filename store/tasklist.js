@@ -23,7 +23,8 @@ const types = {
 	ADD_TASK_LIST: 'ADD_TASK_LIST',
 	UPDATE_TASK_LIST: 'UPDATE_TASK_LIST',
 	REMOVE_TASK_LIST: 'REMOVE_TASK_LIST',
-	SET_TASKLISTS: 'SET_TASKLISTS'
+	SET_TASKLISTS: 'SET_TASKLISTS',
+	SET_TASKLIST: 'SET_TASKLIST'
 }
 
 
@@ -57,7 +58,7 @@ const tasklist = {
 			return state.items
 		},
 
-		getSingleTask: state => {
+		getSingleTasklist: state => {
 			return state.tasklist
 		}
 	},
@@ -66,6 +67,23 @@ const tasklist = {
 	 * define actions bound to tasklists store
 	 */
 	actions: {
+
+		/**
+		 * get single tasklist
+		 */
+		 getTasklist(context, {slug}) {
+			 return makeRequest('GET', api + 'tasklists/' + slug).then((response) => {
+				 console.log(response)
+
+				 context.commit(types.SET_TASKLIST, response.data.data)
+
+				 return Promise.resolve()
+			 })
+			 .catch((error) => {
+				 console.log(error)
+				 return Promise.reject()
+			 })
+		 },
 
 		/**
 		 * get tasklists
@@ -93,7 +111,7 @@ const tasklist = {
 			name
 		}) {
 			console.log(name)
-			
+
 				return makeRequest('POST', api + 'tasklists/create-tasklist', {
 						name
 					})
@@ -204,6 +222,10 @@ const tasklist = {
 
 		[types.SET_TASKLISTS](state, payload) {
 			state.items = payload
+		},
+
+		[types.SET_TASKLIST](state, payload) {
+			state.tasklist = payload
 		}
 	},
 	namespaced: true
