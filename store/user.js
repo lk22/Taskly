@@ -1,18 +1,16 @@
 /**
  * imports
  */
-
-
 import Vuex from 'vuex'
 
 import {
 	makeRequest
-} from '~/globals'
+} from '~/globals/index.js'
 
 import {
 	api,
 	oauth
-} from '~/globals/API/endpoints'
+} from '~/globals/API/endpoints.js'
 
 
 /**
@@ -20,7 +18,7 @@ import {
  */
 
 
-const types = {
+export const types = {
 	SET_USER: 'SET_USER',
 	UPDATE_USER: 'UPDATE_USER',
 	TOGGLE_ADMIN: 'TOGGLE_ADMIN',
@@ -91,7 +89,7 @@ const user = {
 
 
 						context.commit(types.SET_USER, {
-							...auth,
+							// ...auth,
 							token,
 						})
 

@@ -19,7 +19,7 @@ export default {
     },
 
     /**
-     * methods bound to componentv
+     * methods bound to component
      * @type {Object}
      */
     methods: {
@@ -58,7 +58,7 @@ export default {
         }
     },
 }
-
+// v-if="!$store.state.authUser" 
 </script>
 
 
@@ -70,7 +70,7 @@ export default {
     <div class="login-container__form-container__form">
 
         <!-- login form -->
-        <form v-if="!$store.state.authUser" @submit.prevent="login" class="login-container__form" method="post">
+        <form @submit.prevent="login" class="login-container__form" method="post">
 
             <!-- email input group -->
             <div class="form-group">
@@ -98,7 +98,7 @@ export default {
 
             <!-- submit button group -->
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="login">
+                <input type="submit" class="btn btn-primary auth-btn" value="login">
             </div>
         </form><!-- login form -->
         <div class="login-container__error" v-if="error">

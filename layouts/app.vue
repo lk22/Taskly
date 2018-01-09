@@ -1,5 +1,6 @@
 <script>
-    import TasklyHeader from '~/components/app/components/Header'
+    //import TasklyHeader from '~/components/app/components/Header.vue'
+    import Sidebar from '../components/app/components/Sidebar.vue'
 
     /**
      * bootstrap components
@@ -10,9 +11,9 @@
         Popover, // popover component
         Badge, // badge component
         Alert, // alert component
-        Dropdown,
-        Modal,
-        Form
+        Dropdown, // dropdown component
+        Modal, // modal component
+        Form // form component
     } from 'bootstrap-vue/es/components';
 
 
@@ -20,6 +21,7 @@
         components: {
             // Taskly specific components
             //TasklyHeader,
+            Sidebar,
 
             // Bootstrap components
             Badge,
@@ -32,23 +34,25 @@
 </script>
 
 <template>
-    <!-- app dashboard wrapper -->
-    <div class="app dashboard-wrapper">
+    <div>
+        <!-- app dashboard wrapper -->
+        <div id="app" class="app dashboard-wrapper">
 
-        <!-- app header-->
-        <!--<TasklyHeader/>-->
+            <!-- app header-->
+            <!--<TasklyHeader/>-->
 
-        <!-- inner container -->
-        <div class="dashboard-wrapper__inner">
+            <!-- inner container -->
+            <div class="dashboard-wrapper__inner">
+                <Sidebar/>
 
-            <!-- content container -->
-            <div class="dashboard-content">
-                <!-- dashboard page content -->
-                <nuxt/>
-            </div>
+                <!-- content container -->
+                <div class="dashboard-content">
+                    <!-- dashboard page content -->
 
-        </div> <!-- inner container end -->
-
+                    <nuxt/>
+                </div>
+            </div> <!-- inner container end -->
+        </div>
     </div>
 </template>
 

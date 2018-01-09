@@ -2,8 +2,6 @@
 import Header from '~/components/landingpage/Header'
 import Register from '~/components/auth/Register'
 	export default {
-		
-
 		components: {
 			Header,
 			Register
