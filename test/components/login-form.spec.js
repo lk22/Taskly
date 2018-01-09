@@ -2,47 +2,60 @@ import {mount} from 'vue-test-utils'
 import expect from 'expect'
 import Auth from '~/../../components/auth/login-form.vue'
 
+// import Assert from '../assertions.js'
+
 describe('Authentication form component', () => {
 
-	let auth
+	let assert, auth
+
+	beforeEach(() => {
+		assert = new Assert(Auth)
+		auth = mount(Auth)
+		auth.setData({
+			error: false,
+			username: '',
+			password: '',
+			message: '',
+		})
+	})
+
+	it('exists', () => {
+		expect(auth.isEmpty()).toBe(false)
+	})
+
+	it('contains name of loginForm', () => {
+		expect(auth.name()).toBe('loginForm')
+	})
 
 	it('contains username field', () => {
-		auth = mount(Auth)
-
-		assertContains(auth, 'input[name=username')
+		expect(auth.contains('input[name=username]')).toBe(true)
 	})
 
 	it('contains password field', () => {
-		auth = mount(Auth)
-
-		assertContains(auth, 'input[name=password]')
+		expect(auth.contains('input[name=password]')).toBe(true)
 	})
 
-	it.only('contains submit button', () => {
-		auth = mount(Auth)
-
-		assertContains(auth, 'input[type=submit]')
+	it('contains submit button', () => {
+		expect(auth.contains('input[type=submit]')).toBe(true)
 	})
 
 	it('shows error message on invalid credentials', () => {
-		auth = mount(Auth)
+
+		// expect(auth.find('login-container__error').exists()).toBe(false)
 
 		triggerInputEventOn('input[name=username]', '')
 		triggerInputEventOn('input[name=password]', '')
-		triggerClickEventOn('input.auth-btn')
+		triggerClickEventOn('input[type=submit]')
 
-		console.log(auth.vm.$options)
+		auth.setData({
+			error: true
+		})
 
-		// expect(auth.vm.error).toContain('Something is wrong with your credentials please double check and try again')
+		// auth.vm.$nextTick(() => {
+			expect(auth.vm.message).toContain('Something is wrong with your credentials')
+		// })
+
 	})
-
-	let assertContains = (component, selector) => {
-		expect(component.contains(selector)).toBe(true)
-	}
-
-	let assertNotContains = (component, selector) => {
-		expect(component.contains(selector)).toBe(false)
-	}
 
 	let triggerClickEventOn = (selector) => {
 		auth.find(selector).trigger('click')

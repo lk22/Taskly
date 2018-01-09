@@ -4,9 +4,10 @@ export default {
     name: 'loginForm',
     data() {
         return {
-            error: '',
+            error: false,
             username: '',
-            password: ''
+            password: '',
+            message: '',
         }
     },
 
@@ -16,6 +17,17 @@ export default {
      */
     mounted() {
         console.log("Login Component mounted")
+    },
+
+    computed: {
+        feedback() {
+            if(this.error){
+                this.message = 'Something is wrong with your credentials please double check and try again'
+                return this.message
+            }
+
+            return this.message
+        }
     },
 
     /**
@@ -40,7 +52,7 @@ export default {
                this.username && this.password === '' ||
                this.username === '' && this.password
             ) {
-                this.error = 'Something is wrong with your credentials please double check and try again'
+                this.error = true
             } else {
 
                 /**
@@ -66,6 +78,7 @@ export default {
     Login form component template
 -->
 <template>
+    <div>
     <!-- login form container -->
     <div class="login-container__form-container__form">
 
@@ -101,10 +114,12 @@ export default {
                 <input type="submit" class="btn btn-primary auth-btn" value="login">
             </div>
         </form><!-- login form -->
-        <div class="login-container__error" v-if="error">
-            <p class="error">{{ error }}</p>
-        </div>
+        <p class="login-container__error" v-if="error" v-text="feedback">
+            
+        </p>
     </div><!-- login form container end -->
+
+    </div>
 </template>
 
 <!--

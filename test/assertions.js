@@ -7,45 +7,63 @@
  */
 import expect from 'expect'
 
-/**
- * AssertContains
- * assert a element exists in a component
- */
-export const assertContains = (component, selector) => {
+export default class Assert {
+	constructor(component){
+		this.component = component
+	}
 
-	if(!component)
-		throw new Error('Could not find your component to assert is has certain element')
+	true(statement) {
+		expect(statement).toBe(true)
+	}
 
-	if(!element)
-		throw new Error('Could not assert on a empty element in your component')
+	false(statement) {
+		expect(statement).toBe(false)
+	}
 
-	expect(component.contains(selector)).toBe(true)
-}
+	contains(selector) {
+		if(!this.component)
+			throw new Error('Could not find your component to assert is has certain element')
 
-/**
- * AssertNotContains
- * Assert a element not exists in a component
- */
-export const assertContains = (component, selector) => {
+		if(!element)
+			throw new Error('Could not assert on a empty element in your component')
 
-	if(!component)
-		throw new Error('Could not find your component to assert is has certain element')
+		expect(this.component.contains(selector)).toBe(true)
+	}
 
-	if(!element)
-		throw new Error('Could not assert on a empty element in your component')
+	notContains(selector) {
+		if(!this.component)
+			throw new Error('Could not find your component to assert is has certain element')
 
-	expect(component.contains(selector)).toBe(false)
-}
+		if(!element)
+			throw new Error('Could not assert on a empty element in your component')
 
-/**
- * Assert html on a component
- * @param  {[type]} component [description]
- * @param  {[type]} html      [description]
- * @return {[type]}           [description]
- */
-export const assertHtmlOn = (component, html) => {
-	if(!component) 
-		throw new Error('Could not assert any html content on a non given component')
+		expect(this.component.contains(selector)).toBe(false)
+	}
 
-	expect(component.html()).toContain(html)
+	html(html) {
+		if(!this.component) 
+			throw new Error('Could not assert any html content on a non given component')
+
+		expect(this.component.html()).toContain(html)
+	}
+
+	exists(element) {
+		expect(this.component.find(element).exists()).toBe(true)
+	}
+
+	notExists(element) {
+		expect(this.component.find(element).exists()).toBe(false)
+	}
+
+	tick(callback, done) {
+		this.component.vm.$nextTick(() => {
+			try {
+				callback()
+
+				done()
+			} catch(e) {
+				done(e)
+			}
+		})
+	}
 }
